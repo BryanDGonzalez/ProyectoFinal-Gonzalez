@@ -28,7 +28,7 @@ const ItemCount = ({ stock, initial = 1, onAdd }) => {
         onClick={() => onAdd(quantity)}
         disabled={stock === 0}
       >
-        Add to Cart
+        {stock === 0 ? 'Sin Stock' : 'Agregar al Carrito'}
       </button>
     </div>
   );

@@ -1,12 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useCart } from '../../context/CartContext';
 import './Cart.css';
 
-const Cart = ({ cart, onRemove, onUpdateQuantity, onClearCart }) => {
+const Cart = () => {
   const navigate = useNavigate();
-  
-  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const { 
+    cart, 
+    removeFromCart, 
+    updateQuantity, 
+    getSubtotal, 
+    getTotal 
+  } = useCart();
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('es-AR', {
@@ -16,7 +22,7 @@ const Cart = ({ cart, onRemove, onUpdateQuantity, onClearCart }) => {
   };
 
   const handleRemoveItem = (item) => {
-    onRemove(item.id);
+    removeFromCart(item.id);
     toast.info(`Se eliminó ${item.name} del carrito`, {
       position: "top-right",
       autoClose: 2000,
@@ -28,7 +34,7 @@ const Cart = ({ cart, onRemove, onUpdateQuantity, onClearCart }) => {
   };
 
   const handleUpdateQuantity = (item, newQuantity) => {
-    onUpdateQuantity(item.id, newQuantity);
+    updateQuantity(item.id, newQuantity);
     toast.info(`Cantidad de ${item.name} actualizada a ${newQuantity}`, {
       position: "top-right",
       autoClose: 2000,
@@ -40,18 +46,7 @@ const Cart = ({ cart, onRemove, onUpdateQuantity, onClearCart }) => {
   };
 
   const handleCheckout = () => {
-    toast.success('¡Gracias por tu compra!', {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
-    onClearCart();
-    setTimeout(() => {
-      navigate('/');
-    }, 3000);
+    navigate('/checkout');
   };
 
   return (
@@ -66,7 +61,7 @@ const Cart = ({ cart, onRemove, onUpdateQuantity, onClearCart }) => {
       {cart.length === 0 ? (
         <div className="empty-cart">
           <p>😢 Tu carrito está vacío</p>
-          <button className="continue-shopping" onClick={() => navigate('/productos')}>
+          <button className="continue-shopping" onClick={() => navigate('/')}>
             Continuar Comprando
           </button>
         </div>
@@ -106,13 +101,21 @@ const Cart = ({ cart, onRemove, onUpdateQuantity, onClearCart }) => {
           </div>
 
           <div className="cart-summary">
+            <div className="cart-subtotal">
+              <span>Subtotal:</span>
+              <span>{formatPrice(getSubtotal())}</span>
+            </div>
+            <div className="cart-tax">
+              <span>IVA (21%):</span>
+              <span>{formatPrice(getSubtotal() * 0.21)}</span>
+            </div>
             <div className="cart-total">
               <span>Total:</span>
-              <span>{formatPrice(total)}</span>
+              <span>{formatPrice(getTotal())}</span>
             </div>
             <div className="cart-actions">
               <button className="checkout-btn" onClick={handleCheckout}>
-                Finalizar Compra
+                Proceder al Checkout
               </button>
             </div>
           </div>

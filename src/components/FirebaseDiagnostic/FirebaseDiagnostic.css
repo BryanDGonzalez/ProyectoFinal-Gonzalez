@@ -1,0 +1,140 @@
+.firebase-diagnostic {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.firebase-diagnostic h3 {
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.diagnostic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.diagnostic-item {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 2px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.diagnostic-item.success {
+  border-color: #48bb78;
+  background: #f0fff4;
+}
+
+.diagnostic-item.error {
+  border-color: #f56565;
+  background: #fff5f5;
+}
+
+.diagnostic-item.checking {
+  border-color: #ed8936;
+  background: #fffaf0;
+}
+
+.status-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.diagnostic-info h4 {
+  margin: 0 0 0.5rem 0;
+  color: #2d3748;
+  font-size: 1.1rem;
+}
+
+.diagnostic-info p {
+  margin: 0;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.diagnostic-error {
+  background: #fed7d7;
+  border: 1px solid #feb2b2;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.diagnostic-error h4 {
+  color: #c53030;
+  margin: 0 0 1rem 0;
+}
+
+.diagnostic-error p {
+  color: #742a2a;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.diagnostic-suggestions h5 {
+  color: #c53030;
+  margin: 0 0 1rem 0;
+}
+
+.diagnostic-suggestions ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: #742a2a;
+}
+
+.diagnostic-suggestions li {
+  margin-bottom: 0.5rem;
+}
+
+.diagnostic-actions {
+  text-align: center;
+}
+
+.refresh-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.refresh-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+}
+
+@media (max-width: 768px) {
+  .firebase-diagnostic {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .diagnostic-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .diagnostic-item {
+    padding: 1rem;
+  }
+  
+  .status-icon {
+    font-size: 1.5rem;
+    min-width: 1.5rem;
+  }
+} 

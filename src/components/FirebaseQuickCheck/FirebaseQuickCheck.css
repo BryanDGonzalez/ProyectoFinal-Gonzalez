@@ -1,0 +1,153 @@
+.firebase-quick-check {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.firebase-quick-check h3 {
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.check-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 2px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.check-item.success {
+  border-color: #48bb78;
+  background: #f0fff4;
+}
+
+.check-item.error {
+  border-color: #f56565;
+  background: #fff5f5;
+}
+
+.check-item.checking {
+  border-color: #ed8936;
+  background: #fffaf0;
+}
+
+.status-icon {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.check-info h4 {
+  margin: 0 0 0.25rem 0;
+  color: #2d3748;
+  font-size: 1rem;
+}
+
+.check-info p {
+  margin: 0;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.check-error {
+  background: #fed7d7;
+  border: 1px solid #feb2b2;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.check-error h4 {
+  color: #c53030;
+  margin: 0 0 1rem 0;
+}
+
+.check-error p {
+  color: #742a2a;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.error-suggestions h5 {
+  color: #c53030;
+  margin: 0 0 1rem 0;
+}
+
+.error-suggestions ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: #742a2a;
+}
+
+.error-suggestions li {
+  margin-bottom: 0.5rem;
+}
+
+.check-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.refresh-btn, .console-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.refresh-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.refresh-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.console-btn {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  color: white;
+}
+
+.console-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(72, 187, 120, 0.3);
+}
+
+@media (max-width: 768px) {
+  .firebase-quick-check {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .check-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .refresh-btn, .console-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+} 

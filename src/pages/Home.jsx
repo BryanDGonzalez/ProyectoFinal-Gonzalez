@@ -1,12 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaWineBottle, FaBeer, FaGlassWhiskey } from 'react-icons/fa';
+import { useCart } from '../context/CartContext';
+import { getProducts } from '../services/firestoreService';
 import ProductCard from '../components/ProductCard/ProductCard';
-import { products } from '../data/products';
 import './Home.css';
 
-const Home = ({ onAddToCart }) => {
-  const featuredProducts = products.slice(0, 4);
+const Home = () => {
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { addToCart } = useCart();
+
+  useEffect(() => {
+    const fetchFeaturedProducts = async () => {
+      try {
+        const products = await getProducts();
+        // Tomar los primeros 4 productos como destacados
+        setFeaturedProducts(products.slice(0, 4));
+      } catch (error) {
+        console.error('Error fetching featured products:', error);
+        setFeaturedProducts([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeaturedProducts();
+  }, []);
+
+  const handleAddToCart = (product, quantity = 1) => {
+    console.log('🛒 Agregando producto desde Home:', { product, quantity });
+    try {
+      addToCart(product, quantity);
+      console.log('✅ Producto agregado exitosamente desde Home');
+    } catch (error) {
+      console.error('❌ Error agregando producto desde Home:', error);
+    }
+  };
 
   const categories = [
     {
@@ -16,13 +46,13 @@ const Home = ({ onAddToCart }) => {
       description: 'Refrescantes bebidas carbonatadas'
     },
     {
-      id: 'cerveza',
+      id: 'cervezas',
       name: 'Cervezas',
       icon: <FaBeer />,
       description: 'Variedad de cervezas artesanales'
     },
     {
-      id: 'aperitivo',
+      id: 'aperitivos',
       name: 'Aperitivos',
       icon: <FaGlassWhiskey />,
       description: 'Bebidas espirituosas y aperitivos'
@@ -43,15 +73,26 @@ const Home = ({ onAddToCart }) => {
 
       <section className="featured-products">
         <h2>Productos Destacados</h2>
-        <div className="products-grid">
-          {featuredProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onAddToCart={onAddToCart}
-            />
-          ))}
-        </div>
+        {loading ? (
+          <div className="loading-container">
+            <div className="loading">Cargando productos destacados...</div>
+          </div>
+        ) : featuredProducts.length > 0 ? (
+          <div className="products-grid">
+            {featuredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={handleAddToCart}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="no-products">
+            <p>No hay productos destacados disponibles.</p>
+            <p>Verifica que la base de datos de Firebase esté poblada.</p>
+          </div>
+        )}
       </section>
 
       <section className="categories-preview">
@@ -59,7 +100,7 @@ const Home = ({ onAddToCart }) => {
         <div className="categories-grid">
           {categories.map((category) => (
             <Link 
-              to={`/productos?category=${category.id}`} 
+              to={`/categoria/${category.id}`} 
               key={category.id}
               className="category-card"
             >

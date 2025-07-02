@@ -1,19 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { categories } from '../../data/products';
+import CartWidget from '../CartWidget/CartWidget';
 import './Navbar.css';
 
-const Navbar = ({ cartItems }) => {
-  const cartItemsCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+const Navbar = () => {
+  const categories = [
+    { id: "aperitivos", name: "Aperitivos" },
+    { id: "cervezas", name: "Cervezas" },
+    { id: "gaseosa", name: "Gaseosas" }
+  ];
 
   return (
     <nav className="navbar">
       <div className="nav-brand">
-        <Link to="/">My Store</Link>
+        <Link to="/">La Tiendita</Link>
       </div>
       
       <div className="nav-categories">
-        <Link to="/" className="nav-link">All Products</Link>
+        <Link to="/" className="nav-link">Todos los Productos</Link>
         {categories.map(category => (
           <Link 
             key={category.id}
@@ -23,12 +27,11 @@ const Navbar = ({ cartItems }) => {
             {category.name}
           </Link>
         ))}
+        <Link to="/admin" className="nav-link admin-link">Admin</Link>
       </div>
 
       <div className="nav-cart">
-        <Link to="/cart" className="cart-link">
-          Cart ({cartItemsCount})
-        </Link>
+        <CartWidget />
       </div>
     </nav>
   );
