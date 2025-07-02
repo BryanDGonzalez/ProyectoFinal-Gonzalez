@@ -172,11 +172,11 @@ npm run preview      # Previsualizar build de producción
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+Este proyecto está bajo la Licencia MITia. Ver el archivo `LICENSE` para más detalles.
 
 ## 👨‍💻 Autor
 
-**González** - Desarrollador Full Stack
+**González** -Futuro Desarrollador Full Stack
 
 ---
 
